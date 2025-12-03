@@ -43,7 +43,7 @@ export default function Home() {
         {/* PROFILE IMAGE */}
         <div className="flex justify-center md:justify-end">
           <img 
-            src="/ptp.jpeg" 
+            src="/profile.jpeg" 
             alt="Profile"
             className="w-52 h-52 md:w-72 md:h-72 object-cover rounded-full border-4 border-cyan-500 shadow-xl hover:scale-105 transition-transform"
           />
