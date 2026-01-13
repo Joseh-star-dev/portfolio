@@ -11,9 +11,9 @@ const fadeUp = {
 
 export default function AboutPage() {
   return (
-    <main className="w-full bg-white">
+    <main className="w-full bg-gray-50">
       {/* HERO */}
-      <section className="bg-gray-50">
+      <section className="bg-white">
         <div className="max-w-7xl mx-auto px-6 py-24 text-center">
           <motion.h1
             variants={fadeUp}
@@ -51,8 +51,8 @@ export default function AboutPage() {
           <h2 className="text-3xl font-bold text-gray-900 mb-4">Who We Are</h2>
           <p className="text-gray-600 leading-relaxed mb-4">
             NovaStack Digital is a Kenya-based web development company
-            delivering high-quality websites and web applications using modern
-            technologies like Next.js, React, and scalable backend systems.
+            delivering high-quality websites and applications using Next.js,
+            React, and scalable backend systems.
           </p>
           <p className="text-gray-600 leading-relaxed">
             We focus on performance, clean design, security, and long-term
@@ -73,13 +73,57 @@ export default function AboutPage() {
             alt="NovaStack Digital team"
             width={420}
             height={320}
-            className="rounded-2xl shadow-md"
+            className="rounded-2xl shadow-md object-cover"
           />
         </motion.div>
       </section>
 
+      {/* FOUNDER SECTION */}
+      <section className="bg-blue-50 py-24">
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+          <motion.div
+            initial={{ opacity: 0, x: -40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="text-center md:text-left"
+          >
+            <h2 className="text-3xl font-bold text-blue-600 mb-4">
+              Meet the Founder
+            </h2>
+            <p className="text-gray-700 mb-4">
+              NovaStack Digital was founded by{" "}
+              <span className="font-semibold">Joseph Mutungi</span>, a
+              full-stack developer passionate about building fast, reliable, and
+              scalable web solutions.
+            </p>
+            <p className="text-gray-700">
+              With expertise in React, Next.js, Node.js, and modern web
+              technologies, Joseph leads the team to deliver high-quality
+              solutions that help businesses succeed online.
+            </p>
+          </motion.div>
+
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ duration: 0.6 }}
+            className="flex justify-center"
+          >
+            <Image
+              src="/p1.jpeg"
+              alt="Joseph Mutungi - Founder NovaStack Digital"
+              width={350}
+              height={350}
+              className="rounded-full shadow-lg object-cover"
+            />
+          </motion.div>
+        </div>
+      </section>
+
       {/* VALUES */}
-      <section className="bg-gray-50 py-24">
+      <section className="py-24">
         <div className="max-w-7xl mx-auto px-6">
           <motion.h2
             variants={fadeUp}
@@ -96,15 +140,15 @@ export default function AboutPage() {
             {[
               {
                 title: "Performance First",
-                desc: "We build fast-loading websites optimized for SEO and Core Web Vitals.",
+                desc: "Fast-loading websites optimized for SEO and Core Web Vitals.",
               },
               {
                 title: "Clean & Scalable Code",
-                desc: "Maintainable, scalable architectures that support long-term growth.",
+                desc: "Maintainable architectures that support long-term growth.",
               },
               {
                 title: "Business-Driven Solutions",
-                desc: "Every project is aligned with clear business and conversion goals.",
+                desc: "Projects aligned with clear business and conversion goals.",
               },
             ].map((item, index) => (
               <motion.div
@@ -180,12 +224,20 @@ export default function AboutPage() {
           <p className="text-blue-100 mb-8">
             Ready to take your business online or upgrade your digital presence?
           </p>
-          <a
-            href="/contact"
-            className="inline-block bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition"
-          >
-            Contact Us
-          </a>
+          <div className="flex flex-wrap justify-center gap-4">
+            <a
+              href="/contact"
+              className="inline-block bg-white text-blue-600 px-8 py-3 rounded-lg font-bold hover:bg-gray-100 transition"
+            >
+              Contact Us
+            </a>
+            <a
+              href="/projects"
+              className="inline-block border border-white text-white px-8 py-3 rounded-lg font-bold hover:bg-white hover:text-blue-600 transition"
+            >
+              View Our Work
+            </a>
+          </div>
         </motion.div>
       </section>
     </main>
