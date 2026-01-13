@@ -1,21 +1,22 @@
-"use client"
-import { useState } from 'react';
-import { FaEnvelope, FaGithub, FaWhatsapp } from 'react-icons/fa'
-import { motion } from 'framer-motion'
+"use client";
+
+import { useState } from "react";
+import { FaEnvelope, FaGithub, FaWhatsapp } from "react-icons/fa";
+import { motion } from "framer-motion";
 
 export default function Contact() {
-    const [form, setForm] = useState({ name: "", email: "", message: "" });
-    const [loading, setLoading] = useState(false);
-    const [success, setSuccess] = useState(null);
+  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [loading, setLoading] = useState(false);
+  const [status, setStatus] = useState(null);
 
-    const handleChange = (e) => {
-      setForm({ ...form, [e.target.name]: e.target.value });
-    };
- 
-    const handleSubmit = async (e) => {
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
-    setSuccess(null);
+    setStatus(null);
 
     try {
       const res = await fetch("/api/contact", {
@@ -25,107 +26,136 @@ export default function Contact() {
       });
 
       const data = await res.json();
-        if (data.success) {
-          setSuccess("Message sent successfully!");
-          setForm({ name: "", email: "", message: "" });
-        } else {
-          setSuccess("Failed to send message. Try again.");
-        }
-     }   catch (err) {
-      console.error(err);
-      setSuccess("Something went wrong.");
+      if (data.success) {
+        setStatus({ type: "success", message: "Message sent successfully." });
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        setStatus({ type: "error", message: "Failed to send message." });
+      }
+    } catch {
+      setStatus({ type: "error", message: "Something went wrong." });
     } finally {
       setLoading(false);
     }
   };
+
   return (
-    <div className="min-h-screen flex flex-col md:flex-row justify-center items-center bg-gray-900 text-gray-200 p-6 md:p-12 gap-8 md:gap-16">
+    <section className="w-full min-h-screen bg-gradient-to-br from-white to-blue-50 px-6 py-20">
+      <div className="max-w-6xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-12 items-center">
+        {/* FORM */}
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, ease: "easeOut" }}
+          className="bg-white rounded-2xl shadow-xl p-8 md:p-10"
+        >
+          <h2 className="text-3xl font-bold text-blue-600 mb-2">
+            Get in Touch
+          </h2>
+          <p className="text-gray-600 mb-6">
+            Have a project or idea? Let’s discuss how we can work together.
+          </p>
 
-      {/* Contact Form */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.8 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ duration: 0.5, ease: "easeInOut" }}
-        className="w-full md:w-1/2 max-w-md bg-gray-800 rounded-2xl shadow-lg p-6 md:p-8"
-      >
-        <h2 className="font-extrabold text-2xl text-cyan-400 mb-4">Let’s Connect 💬</h2>
+          <form onSubmit={handleSubmit} className="space-y-4">
+            <input
+              name="name"
+              value={form.name}
+              onChange={handleChange}
+              placeholder="Your name"
+              required
+              className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            />
 
-         <form onSubmit={handleSubmit} className="space-y-3">
-          <input
-            name="name"
-            value={form.name}
-            onChange={handleChange}
-            placeholder="Enter your name"
-            required
-            className="w-full p-3 rounded bg-gray-800 border border-gray-700"
-          />
-          <input
-            type="email"
-            name="email"
-            value={form.email}
-            onChange={handleChange}
-            placeholder="Enter your email"
-            required
-            className="w-full p-3 rounded bg-gray-800 border border-gray-700"
-          />
-          <textarea
-            name="message"
-            value={form.message}
-            onChange={handleChange}
-            rows="4"
-            placeholder="Type your message"
-            required
-            className="w-full p-3 rounded bg-gray-800 border border-gray-700"
-          ></textarea>
+            <input
+              type="email"
+              name="email"
+              value={form.email}
+              onChange={handleChange}
+              placeholder="Your email"
+              required
+              className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500"
+            />
 
-          <button
-            type="submit"
-            className="w-full bg-cyan-600 px-6 py-2 rounded-lg hover:bg-cyan-700 transition mt-2"
-            disabled={loading}
-          >
-            {loading ? "Sending..." : "Send Message"}
-          </button>
+            <textarea
+              name="message"
+              value={form.message}
+              onChange={handleChange}
+              rows="5"
+              placeholder="Your message"
+              required
+              className="w-full rounded-lg border border-gray-300 px-4 py-3 focus:outline-none focus:ring-2 focus:ring-cyan-500 resize-none"
+            />
 
-          {success && (
-            <p
-              className={`text-center text-sm mt-2 ${
-                success.includes("success") ? "text-green-400" : "text-red-400"
-              }`}
+            <button
+              type="submit"
+              disabled={loading}
+              className="w-full bg-gradient-to-r from-cyan-500 to-blue-600 text-white font-semibold py-3 rounded-lg hover:opacity-90 transition disabled:opacity-60"
             >
-              {success}
-            </p>
-          )}
-        </form>
-      </motion.div>
+              {loading ? "Sending..." : "Send Message"}
+            </button>
 
-      {/* Contact Links */}
-      <div className="w-full md:w-1/2 max-w-sm flex flex-col items-center justify-center gap-6 bg-gray-800 rounded-2xl p-6 shadow-lg">
-        <a
-          href="mailto:josehstar@gmail.com"
-          className="flex items-center justify-center space-x-3 hover:text-cyan-400 transition"
-        >
-          <FaEnvelope className="text-yellow-400 text-xl" />
-          <span className="text-sm md:text-base">Email</span>
-        </a>
+            {status && (
+              <p
+                className={`text-sm text-center mt-2 ${
+                  status.type === "success" ? "text-green-600" : "text-red-500"
+                }`}
+              >
+                {status.message}
+              </p>
+            )}
+          </form>
+        </motion.div>
 
-        <a
-          href="https://wa.me/254113822842?text=Hi%20Joseph!%20I%20checked%20your%20portfolio%20and%20I%27m%20interested%20in%20working%20with%20you."
-          target="_blank"
-          className="flex items-center justify-center space-x-3 hover:text-cyan-400 transition"
+        {/* CONTACT LINKS */}
+        <motion.div
+          initial={{ opacity: 0, y: 60 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          viewport={{ once: true }}
+          transition={{ duration: 0.6, delay: 0.1 }}
+          className="flex flex-col gap-6"
         >
-          <FaWhatsapp className="text-green-500 text-xl" />
-          <span className="text-sm md:text-base">WhatsApp</span>
-        </a>
+          <ContactLink
+            icon={<FaEnvelope />}
+            label="Email"
+            value="josehstar@gmail.com"
+            href="mailto:josehstar@gmail.com"
+            color="text-blue-600"
+          />
 
-        <a
-          href="https://github.com/Joseh-star-dev"
-          target="_blank"
-          className="flex items-center justify-center space-x-3 hover:text-cyan-400 transition"
-        >
-          <FaGithub className="text-xl" />
-          <span className="text-sm md:text-base">GitHub</span>
-        </a>
+          <ContactLink
+            icon={<FaWhatsapp />}
+            label="WhatsApp"
+            value="+254 113 822 842"
+            href="https://wa.me/254113822842"
+            color="text-green-600"
+          />
+
+          <ContactLink
+            icon={<FaGithub />}
+            label="GitHub"
+            value="Joseh-star-dev"
+            href="https://github.com/Joseh-star-dev"
+            color="text-gray-800"
+          />
+        </motion.div>
       </div>
-    </div>
-  )
+    </section>
+  );
+}
+
+function ContactLink({ icon, label, value, href, color }) {
+  return (
+    <a
+      href={href}
+      target="_blank"
+      className="flex items-center gap-4 bg-white rounded-xl shadow-md p-5 hover:shadow-lg transition"
+    >
+      <div className={`text-2xl ${color}`}>{icon}</div>
+      <div>
+        <p className="text-sm text-gray-500">{label}</p>
+        <p className="font-medium text-gray-800">{value}</p>
+      </div>
+    </a>
+  );
 }
