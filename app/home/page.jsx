@@ -17,7 +17,7 @@ export const metadata = {
     title: "NovaStack Digital | Web Development Company in Kenya",
     description:
       "We build fast, secure, and SEO-optimized websites using Next.js, React, and modern backend technologies.",
-    url: "https://yourdomain.com",
+    url: "https://novastackdigital.com",
     siteName: "NovaStack Digital",
     images: [
       {
