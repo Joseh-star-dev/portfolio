@@ -6,6 +6,6 @@ export default function robots() {
         allow: "/",
       },
     ],
-    sitemap: "https://josephjack.vercel.app/sitemap.xml",
+    sitemap: "https://novastackdigital.com/sitemap.xml",
   };
 }
