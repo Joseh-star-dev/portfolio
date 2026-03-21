@@ -29,17 +29,21 @@ export const metadata = {
     "full stack development Kenya",
     "SEO optimized websites",
     "custom web applications",
+    "Best we developer",
+    "Novastack digital",
+    "Mutungi Muithi",
+    "Joseph Mutungi",
   ],
-  metadataBase: new URL("https://novastackdigital.com"),
+  metadataBase: new URL("https://novastackdigital.co.ke"),
   openGraph: {
     title: "NovaStack Digital | Web Development Company in Kenya",
     description:
       "We build fast, secure, and scalable websites using Next.js, React, and modern backend technologies.",
-    url: "https://novastackdigital.com",
+    url: "https://novastackdigital.co.ke",
     siteName: "NovaStack Digital",
     images: [
       {
-        url: "/preview.png",
+        url: "/hero.png",
         width: 1200,
         height: 630,
         alt: "NovaStack Digital Web Development Company",

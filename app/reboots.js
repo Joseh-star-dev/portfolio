@@ -6,6 +6,6 @@ export default function robots() {
         allow: "/",
       },
     ],
-    sitemap: "https://novastackdigital.com/sitemap.xml",
+    sitemap: "https://novastackdigital.co.ke/sitemap.xml",
   };
 }
