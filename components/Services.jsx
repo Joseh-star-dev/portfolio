@@ -11,8 +11,8 @@ const fadeUp = {
 
 export default function ServicesSection() {
   return (
-    <section className="w-full bg-white py-24">
-      <div className="max-w-7xl mx-auto px-6">
+    <section className="w-full bg-white py-10">
+      <div className="max-w-7xl mx-auto px-2">
         {/* Heading */}
         <motion.div
           variants={fadeUp}
@@ -57,7 +57,7 @@ export default function ServicesSection() {
               whileInView="visible"
               viewport={{ once: true }}
               transition={{ duration: 0.6, delay: index * 0.15 }}
-              className="bg-gray-50 border border-gray-200 rounded-2xl p-6 shadow-sm hover:shadow-md transition hover:-translate-y-1"
+              className="bg-gray-50 border p-2 border-gray-200 rounded-md shadow-sm hover:shadow-md transition hover:-translate-y-1"
             >
               <div className="mb-4">
                 <Image
@@ -65,7 +65,7 @@ export default function ServicesSection() {
                   alt={item.title}
                   width={400}
                   height={250}
-                  className="rounded-xl object-cover w-full h-48"
+                  className="rounded-md object-cover w-full h-48"
                 />
               </div>
 

@@ -80,7 +80,7 @@ export default function AboutPage() {
 
       {/* FOUNDER SECTION */}
       <section className="bg-blue-50 py-24">
-        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-12 items-center">
+        <div className="max-w-7xl mx-auto px-6 grid md:grid-cols-2 gap-20 items-center">
           <motion.div
             initial={{ opacity: 0, x: -40 }}
             whileInView={{ opacity: 1, x: 0 }}
@@ -93,7 +93,7 @@ export default function AboutPage() {
             </h2>
             <p className="text-gray-700 mb-4">
               NovaStack Digital was founded by{" "}
-              <span className="font-semibold">Joseph Mutungi</span>, a
+              <span className="font-semibold">Joseph Mutungi Mwiithi</span>, a
               full-stack developer passionate about building fast, reliable, and
               scalable web solutions.
             </p>
@@ -112,19 +112,19 @@ export default function AboutPage() {
             className="flex justify-center"
           >
             <Image
-              src="/p1.jpeg"
+              src="/founder.jpg"
               alt="Joseph Mutungi - Founder NovaStack Digital"
-              width={350}
-              height={350}
-              className="rounded-full shadow-lg object-cover"
+              width={200}
+              height={200}
+              className="h-60 w-60 rounded-full shadow-lg object-cover"
             />
           </motion.div>
         </div>
       </section>
 
       {/* VALUES */}
-      <section className="py-24">
-        <div className="max-w-7xl mx-auto px-6">
+      <section className="py-10">
+        <div className="max-w-7xl mx-auto px-2">
           <motion.h2
             variants={fadeUp}
             initial="hidden"

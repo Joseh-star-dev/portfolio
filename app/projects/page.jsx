@@ -12,7 +12,10 @@ export default function Projects() {
         transition={{ duration: 0.3, ease: "easeIn" }}
         className="flex flex-col"
       >
-        <p>This page is going some improvement...</p>
+        <h2 className="text-center">Hey!</h2>
+        <p className="text-lg text-gray-600">
+          This page is going some improvements and will be available soon!
+        </p>
       </motion.div>
     </div>
   );

@@ -7,7 +7,7 @@ import { motion } from "framer-motion";
 export default function HeroSection() {
   return (
     <section className="w-full bg-gray-50">
-      <div className="max-w-7xl mx-auto px-6 py-20 flex flex-col-reverse md:flex-row items-center gap-14">
+      <div className="max-w-7xl mx-auto px-2.5 py-10  flex flex-col-reverse md:flex-row items-center gap-14">
         {/* Text Content */}
         <motion.div
           initial={{ opacity: 0, y: 32 }}
@@ -30,7 +30,7 @@ export default function HeroSection() {
           </p>
 
           {/* CTAs */}
-          <div className="flex flex-wrap gap-5 pt-4">
+          <div className="flex text-sm gap-5 pt-4">
             <motion.a
               whileHover={{ scale: 1.04 }}
               whileTap={{ scale: 0.97 }}
@@ -64,7 +64,7 @@ export default function HeroSection() {
             width={440}
             height={440}
             priority
-            className="object-contain drop-shadow-xl"
+            className="object-contain drop-shadow-xl rounded-md"
           />
         </motion.div>
       </div>

@@ -1,6 +1,8 @@
 import HeroSection from "@/components/Hero";
 import Services from "@/components/Services";
 import React from "react";
+import AboutPage from "../about/page";
+import Contact from "../contact/page";
 
 export const metadata = {
   title: "NovaStack Digital | Web Development Company in Kenya",
@@ -38,6 +40,8 @@ function homePage() {
       <HeroSection />
       <section>
         <Services />
+        <AboutPage />
+        <Contact />
       </section>
     </main>
   );

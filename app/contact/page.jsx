@@ -50,6 +50,15 @@ export default function Contact() {
           transition={{ duration: 0.6, ease: "easeOut" }}
           className="bg-white rounded-2xl shadow-xl p-8 md:p-10"
         >
+          {status && (
+            <p
+              className={`text-center mt-2 font-bold ${
+                status.type === "success" ? "text-green-600" : "text-red-500"
+              }`}
+            >
+              {status.message}
+            </p>
+          )}
           <h2 className="text-3xl font-bold text-blue-600 mb-2">
             Get in Touch
           </h2>
@@ -94,16 +103,6 @@ export default function Contact() {
             >
               {loading ? "Sending..." : "Send Message"}
             </button>
-
-            {status && (
-              <p
-                className={`text-sm text-center mt-2 ${
-                  status.type === "success" ? "text-green-600" : "text-red-500"
-                }`}
-              >
-                {status.message}
-              </p>
-            )}
           </form>
         </motion.div>
 
