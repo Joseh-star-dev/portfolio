@@ -16,5 +16,9 @@ export default function sitemap() {
       url: "https://novastackdigital.co.ke/contact",
       lastModified: new Date(),
     },
+    {
+      url: "https://novastackdigital.co.ke/services",
+      lastModified: new Date(),
+    },
   ];
 }
