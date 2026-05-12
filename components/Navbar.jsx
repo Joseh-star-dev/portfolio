@@ -34,119 +34,130 @@ export default function Navbar() {
   }, [isOpen]);
 
   return (
-    <nav className="fixed top-0 w-full z-[100] bg-white/80 backdrop-blur-xl border-b border-gray-100">
-      <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
-        {/* Logo Section */}
-        <Link
-          href="/"
-          className="relative z-50 hover:opacity-90 transition-opacity"
-        >
-          <div className="relative w-[130px] h-[45px] md:w-[160px] md:h-[55px]">
-            <Image
-              src="/jmmlabslogo.png"
-              alt="JMM Labs Logo"
-              fill
-              className="object-contain"
-              priority
-            />
-          </div>
-        </Link>
-
-        {/* Desktop Navigation */}
-        <div className="hidden md:flex items-center gap-1 bg-gray-50/50 p-1.5 rounded-full border border-gray-100">
-          {links.map((l) => {
-            const isActive = pathName === l.path;
-            return (
-              <Link
-                key={l.name}
-                href={l.path}
-                className={`relative px-5 py-2 text-sm font-semibold transition-colors duration-300 rounded-full ${
-                  isActive
-                    ? "text-blue-600"
-                    : "text-gray-500 hover:text-gray-900"
-                }`}
-              >
-                {isActive && (
-                  <motion.span
-                    layoutId="nav-pill"
-                    className="absolute inset-0 bg-white shadow-sm rounded-full"
-                    transition={{ type: "spring", duration: 0.5 }}
-                  />
-                )}
-                <span className="relative z-10">{l.name}</span>
-              </Link>
-            );
-          })}
-        </div>
-
-        {/* Action Button */}
-        <div className="hidden md:block">
-          <button
-            onClick={handleWhatsAppClick}
-            className="group relative flex items-center gap-2 overflow-hidden bg-red-600 px-6 py-2.5 rounded-full text-white font-bold text-sm transition-all hover:bg-blue-700 active:scale-95 shadow-lg shadow-red-200"
+    <nav className="fixed top-0 w-full z-[100]">
+      {/* Main Navbar Header (Always visible) */}
+      <div
+        className={`relative z-[120] w-full transition-colors duration-300 ${isOpen ? "bg-white" : "bg-white/90 backdrop-blur-md border-b border-gray-100"}`}
+      >
+        <div className="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
+          {/* Logo */}
+          <Link
+            href="/"
+            className="relative hover:opacity-90 transition-opacity"
+            onClick={() => setIsOpen(false)}
           >
-            <FaWhatsapp className="text-lg group-hover:rotate-12 transition-transform" />
-            <span>GET STARTED</span>
+            <div className="relative w-[130px] h-[50px] md:w-[160px] md:h-[55px]">
+              <Image
+                src="/jmmlabslogo.png"
+                alt="JMM Labs Logo"
+                fill
+                className="object-contain"
+                priority
+              />
+            </div>
+          </Link>
+
+          {/* Desktop Navigation (Hidden on Mobile) */}
+          <div className="hidden md:flex items-center gap-1 bg-gray-50/80 p-1.5 rounded-full border border-gray-100">
+            {links.map((l) => {
+              const isActive = pathName === l.path;
+              return (
+                <Link
+                  key={l.name}
+                  href={l.path}
+                  className={`relative px-5 py-2 text-sm font-semibold transition-colors duration-300 rounded-full ${
+                    isActive
+                      ? "text-blue-600"
+                      : "text-gray-500 hover:text-gray-900"
+                  }`}
+                >
+                  {isActive && (
+                    <motion.span
+                      layoutId="nav-pill"
+                      className="absolute inset-0 bg-white shadow-sm rounded-full"
+                      transition={{ type: "spring", duration: 0.5 }}
+                    />
+                  )}
+                  <span className="relative z-10">{l.name}</span>
+                </Link>
+              );
+            })}
+          </div>
+
+          {/* Action Button (Desktop Only) */}
+          <div className="hidden md:block">
+            <button
+              onClick={handleWhatsAppClick}
+              className="bg-green-600 px-6 py-2.5 rounded-full text-white font-bold text-sm transition-all hover:bg-green-700 active:scale-95 shadow-lg shadow-green-100"
+            >
+              GET STARTED
+            </button>
+          </div>
+
+          {/* Mobile Toggle Button (Highest Z-index) */}
+          <button
+            onClick={() => setIsOpen(!isOpen)}
+            className="md:hidden p-2 text-gray-800 hover:text-blue-600 transition-colors"
+            aria-label="Toggle Menu"
+          >
+            {isOpen ? <FaTimes size={28} /> : <FaBars size={28} />}
           </button>
         </div>
-
-        {/* Mobile Toggle */}
-        <button
-          onClick={() => setIsOpen(!isOpen)}
-          className="md:hidden relative z-50 p-2 text-gray-600 hover:text-blue-600 transition-colors"
-          aria-label="Toggle Menu"
-        >
-          {isOpen ? <FaTimes size={24} /> : <FaBars size={24} />}
-        </button>
       </div>
 
-      {/* Mobile Menu Overlay */}
+      {/* Full Screen Mobile Menu Overlay */}
       <AnimatePresence>
         {isOpen && (
           <motion.div
-            initial={{ opacity: 0, y: -20 }}
-            animate={{ opacity: 1, y: 0 }}
-            exit={{ opacity: 0, y: -20 }}
-            className="fixed inset-0 bg-white z-40 md:hidden flex flex-col pt-24 px-8"
+            initial={{ opacity: 0, x: "100%" }}
+            animate={{ opacity: 1, x: 0 }}
+            exit={{ opacity: 0, x: "100%" }}
+            transition={{ type: "spring", damping: 30, stiffness: 300 }}
+            className="fixed inset-0 bg-white z-[110] md:hidden flex flex-col"
           >
-            <div className="space-y-4">
-              {links.map((l, i) => (
-                <motion.div
-                  key={l.name}
-                  initial={{ opacity: 0, x: -20 }}
-                  animate={{ opacity: 1, x: 0 }}
-                  transition={{ delay: i * 0.1 }}
-                >
-                  <Link
-                    href={l.path}
-                    onClick={() => setIsOpen(false)}
-                    className={`block text-3xl font-bold ${
-                      pathName === l.path ? "text-blue-600" : "text-gray-400"
-                    }`}
+            {/* Safe Area Padding for content inside menu (Starts below the 80px top bar) */}
+            <div className="flex flex-col h-full pt-28 px-8 pb-12">
+              <div className="flex flex-col space-y-8">
+                {links.map((l, i) => (
+                  <motion.div
+                    key={l.name}
+                    initial={{ opacity: 0, x: 20 }}
+                    animate={{ opacity: 1, x: 0 }}
+                    transition={{ delay: 0.1 + i * 0.1 }}
                   >
-                    {l.name}
-                  </Link>
-                </motion.div>
-              ))}
-            </div>
+                    <Link
+                      href={l.path}
+                      onClick={() => setIsOpen(false)}
+                      className={`block text-4xl font-bold tracking-tight ${
+                        pathName === l.path ? "text-blue-600" : "text-gray-900"
+                      }`}
+                    >
+                      {l.name}
+                    </Link>
+                  </motion.div>
+                ))}
+              </div>
 
-            <motion.div
-              initial={{ opacity: 0 }}
-              animate={{ opacity: 1 }}
-              transition={{ delay: 0.4 }}
-              className="mt-auto mb-12"
-            >
-              <p className="text-gray-400 text-sm mb-4 font-medium uppercase tracking-widest">
-                Connect with us
-              </p>
-              <button
-                onClick={handleWhatsAppClick}
-                className="w-full flex items-center justify-center gap-3 py-5 bg-red-600 text-white rounded-2xl font-bold text-lg shadow-xl shadow-red-100"
+              {/* Bottom Section of Mobile Menu */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ delay: 0.5 }}
+                className="mt-auto"
               >
-                <FaWhatsapp size={24} />
-                WhatsApp Us
-              </button>
-            </motion.div>
+                <div className="h-[1px] bg-gray-100 w-full mb-8" />
+                <button
+                  onClick={() => {
+                    handleWhatsAppClick();
+                    setIsOpen(false);
+                  }}
+                  className="w-full flex items-center justify-center gap-3 py-5 bg-green-600 text-white rounded-2xl font-bold text-xl shadow-xl shadow-green-100"
+                >
+                  <FaWhatsapp size={24} />
+                  WhatsApp Us
+                </button>
+              </motion.div>
+            </div>
           </motion.div>
         )}
       </AnimatePresence>

@@ -2,6 +2,7 @@
 
 import React from "react";
 import Image from "next/image";
+import Link from "next/link"; // Import from next/link
 import { motion } from "framer-motion";
 import { FaArrowRight, FaCheckCircle } from "react-icons/fa";
 
@@ -24,15 +25,20 @@ export default function HeroSection() {
   };
 
   return (
-    <section className="relative w-full bg-white overflow-hidden py-20 lg:py-32">
+    <section
+      className="relative w-full bg-white overflow-hidden pt-32 pb-20 lg:pt-48 lg:pb-32 z-10"
+      /* pt-32 ensures content starts below the 80px (h-20) navbar */
+    >
       {/* Modern Tech Background Elements */}
-      <div className="absolute inset-0 z-0">
+      <div className="absolute inset-0 z-0 pointer-events-none">
         <div className="absolute top-0 left-1/2 -translate-x-1/2 w-full h-full bg-[radial-gradient(#e5e7eb_1px,transparent_1px)] [background-size:40px_40px] [mask-image:radial-gradient(ellipse_50%_50%_at_50%_50%,#000_70%,transparent_100%)] opacity-40" />
-        <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-blue-100/50 rounded-full blur-[120px] -z-10" />
+
+        {/* Adjusted blobs to be slightly lower so they don't interfere with Navbar legibility */}
+        <div className="absolute top-20 right-0 w-[500px] h-[500px] bg-blue-100/50 rounded-full blur-[120px] -z-10" />
         <div className="absolute bottom-0 left-0 w-[400px] h-[400px] bg-red-100/30 rounded-full blur-[100px] -z-10" />
       </div>
 
-      <div className="max-w-7xl mx-auto px-6 relative z-10">
+      <div className="max-w-7xl mx-auto px-6 relative z-20">
         <div className="flex flex-col lg:flex-row items-center gap-16">
           {/* Left Content Column */}
           <motion.div
@@ -141,7 +147,7 @@ export default function HeroSection() {
               >
                 <Image
                   src="/jmmlabsHero.png"
-                  alt="Modern Software Development Lab - JMMLabs Digital Transformation Kenya"
+                  alt="Modern Software Development Lab"
                   fill
                   className="object-contain drop-shadow-[0_35px_35px_rgba(0,0,0,0.15)]"
                   priority
@@ -181,14 +187,5 @@ export default function HeroSection() {
         </div>
       </div>
     </section>
-  );
-}
-
-// Helper Link component if not already imported
-function Link({ href, children, ...props }) {
-  return (
-    <a href={href} {...props}>
-      {children}
-    </a>
   );
 }
